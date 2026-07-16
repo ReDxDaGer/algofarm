@@ -5,6 +5,8 @@ build-backend = "maturin"
 [project]
 name = "algofarm"
 requires-python = ">=3.12"
+description = "A high-performance algorithm library built in Rust for Python."
+readme = "README.md"
 classifiers = [
     "Programming Language :: Rust",
     "Programming Language :: Python :: Implementation :: CPython",
