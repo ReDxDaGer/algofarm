@@ -1,6 +1,6 @@
 [package]
 name = "algofarm"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 description = "A high-performance algorithm library built in Rust for Python."
 authors = ["Yash Mehrotra <yashmehrotra45@gmail.com>"]
