@@ -1,5 +1,10 @@
 # Algofarm
 
+<div align="center">
+  <img src="assets/logo.svg" alt="AlgoFarm Logo" width="500" height="400"/>
+</div>
+
+
 Fast algorithms and a from-scratch deep learning toolkit for Python, implemented in Rust.
 
 Two layers:
