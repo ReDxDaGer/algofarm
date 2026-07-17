@@ -230,11 +230,7 @@ pub fn matrix_inverse(py: Python<'_>, matrix: Vec<Vec<f64>>) -> PyResult<Vec<Vec
                     let factor = a[r][i];
                     for c in 0..n {
                         a[r][c] -= factor * a[i][c];
-                        // BUG FIX: was `i1[r][c] -= factor * i1[r][c]` — that
-                        // subtracts a multiple of the row from itself instead
-                        // of subtracting a multiple of the PIVOT row (row i).
-                        // Gauss-Jordan requires referencing i1[i][c] here, the
-                        // same as the `a` half does with a[i][c] above.
+
                         i1[r][c] -= factor * i1[i][c];
                     }
                 }

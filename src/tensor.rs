@@ -175,7 +175,6 @@ impl Tensor {
             ));
         }
 
-        // Compute dimensions dynamically based on transposition flags
         let m = if transpose_a {
             self.shape[1]
         } else {
@@ -205,7 +204,6 @@ impl Tensor {
             )));
         }
 
-        // Determine input strides safely based on standard layout vs transposed layout
         let rsa = if transpose_a {
             1
         } else {
@@ -244,8 +242,8 @@ impl Tensor {
                 csb,
                 0.0,
                 result_data.as_mut_ptr(),
-                n as isize, // Output row stride (C is standard row-major)
-                1,          // Output column stride
+                n as isize,
+                1,
             );
         });
 
@@ -340,8 +338,6 @@ impl Tensor {
         })
     }
 
-    // --- Add these methods right after pub fn randn(...) ---
-
     pub fn add_bias_inplace(
         &mut self,
         py: Python<'_>,
@@ -362,8 +358,6 @@ impl Tensor {
             )));
         }
 
-        // Get a mutable reference to our data buffer.
-        // If shared by multiple Arcs (e.g. from reshapes), this handles the copy once.
         let data = Arc::make_mut(&mut self.data);
 
         py.allow_threads(|| {
