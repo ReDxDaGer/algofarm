@@ -1,4 +1,4 @@
-# algofarm
+# Algofarm
 
 Fast algorithms and a from-scratch deep learning toolkit for Python, implemented in Rust.
 
