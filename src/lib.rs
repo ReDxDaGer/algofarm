@@ -3,6 +3,11 @@ use std::cell::RefCell;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{SystemTime, UNIX_EPOCH};
 
+mod ml;
+use ml::*;
+mod dl_formulas;
+mod tensor;
+
 // ---------- PRNG (xorshift64*, no external crate) ----------
 static SEED_COUNTER: AtomicU64 = AtomicU64::new(1);
 
@@ -714,6 +719,37 @@ fn algofarm(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(std_dev, m)?)?;
     m.add_function(wrap_pyfunction!(dot_product, m)?)?;
     m.add_function(wrap_pyfunction!(matmul, m)?)?;
+    m.add_function(wrap_pyfunction!(kmeans, m)?)?;
+    m.add_function(wrap_pyfunction!(pairwise_manhattan, m)?)?;
+    m.add_function(wrap_pyfunction!(pairwise_cosine, m)?)?;
+    m.add_function(wrap_pyfunction!(determinant, m)?)?;
+    m.add_function(wrap_pyfunction!(matrix_inverse, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::relu, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::relu_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::leaky_relu, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::leaky_relu_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::elu, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::elu_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::gelu, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::silu, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::silu_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::sigmoid, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::sigmoid_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::tanh, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::tanh_derivative, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::softmax, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::softmax_cross_entropy, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::one_hot, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::mse_loss, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::categorical_cross_entropy, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::mae_loss, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::bce_loss, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::sgd_momentum_step, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::adam_step, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::clip_grad_norm, m)?)?;
+    m.add_function(wrap_pyfunction!(dl_formulas::dropout, m)?)?;
+
+    m.add_class::<tensor::Tensor>()?;
     m.add_class::<FarmHashMap>()?;
     Ok(())
 }
